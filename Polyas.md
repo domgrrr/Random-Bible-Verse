@@ -42,7 +42,11 @@
 
             * Inside the div history-container include an h3 labeled History for the History section
 
-            * Alongside the
+            * Alongside the h3 include a div with the id verse-history with no label where the previous verses will be listed
+
+    * Alongside the div container include another div with the id toast and class toast for displaying messages like Copied to clipboard
+
+    * At the end of the body include a script element that links external JS file placed here for better page loading performance
 
 
 # 2.  styles.css
