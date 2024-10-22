@@ -40,7 +40,9 @@
 
         * Alongside the h1 another div with the class history-container for verse history section
 
-            * 
+            * Inside the div history-container include an h3 labeled History for the History section
+
+            * Alongside the
 
 
 # 2.  styles.css
