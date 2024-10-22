@@ -26,6 +26,10 @@
 
     * Alongside that h1 another div with the id of verse-container for the verse display area
 
+    * Inside the div verse-container a p element with the id of verse labeled Click the button to get a verse
+
+    * Alongside the p element verse another p element with the id of reference with no label where the verse reference will be displayed (book, chapter, verse)
+
     * 
 
 
