@@ -14,6 +14,12 @@
 
       * Character encoding
 
+      * Viewport settings
+
+      * Google Fonts
+
+      * CSS File
+
 # 2.  styles.css
 
 # 3.  script.js
