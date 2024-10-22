@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Random Bible Verse</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				margin: 0;
+				background-color: #f0f0f0;
+				padding: 20px;
+			}
+			.container {
+				text-align: center;
+				background-color: white;
+				padding: 2rem;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				max-width: 600px;
+				width: 100%;
+			}
+			#verse-container {
+				margin: 20px 0;
+				padding: 20px;
+				border: 1px solid #e0e0e0;
+				border-radius: 8px;
+				background-color: #fafafa;
+				min-height: 150px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			#verse {
+				font-family: "Dancing Script", cursive;
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+				line-height: 1.6;
+				color: #2c3e50;
+				opacity: 0;
+				white-space: pre-wrap;
+			}
+			#verse.animated {
+				opacity: 1;
+			}
+			.char {
+				opacity: 0;
+				transform: translateY(20px);
+				display: inline-block;
+				animation: fadeInUp 0.6s forwards;
+			}
+			@keyframes fadeInUp {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			#reference {
+				font-family: "Great Vibes", cursive;
+				font-size: 1.3rem;
+				color: #666;
+				margin-top: 1rem;
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			#reference.animated {
+				opacity: 1;
+				transform: translateY(0);
+				transition: all 1.5s ease;
+				transition-delay: 2s;
+			}
+			#error {
+				color: red;
+				margin-top: 1rem;
+			}
+			.button {
+				background-color: #4caf50;
+				border: none;
+				color: white;
+				padding: 12px 24px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+				border-radius: 5px;
+				transition: background-color 0.3s;
+			}
+			.button:hover {
+				background-color: #45a049;
+			}
+			.button:disabled {
+				background-color: #cccccc;
+				cursor: not-allowed;
+			}
+			.copy-button {
+				background-color: #2196f3;
+				padding: 8px 16px;
+				font-size: 14px;
+			}
+			.copy-button:hover {
+				background-color: #1976d2;
+			}
+			.history-container {
+				margin-top: 20px;
+				text-align: left;
+				max-height: 200px;
+				overflow-y: auto;
+				border-top: 1px solid #e0e0e0;
+				padding-top: 20px;
+			}
+			.history-item {
+				padding: 10px;
+				border-bottom: 1px solid #e0e0e0;
+				cursor: pointer;
+				transition: background-color 0.2s;
+				font-family: "Dancing Script", cursive;
+				font-size: 1.2rem;
+			}
+			.history-item:hover {
+				background-color: #f5f5f5;
+			}
+			.loading {
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border: 3px solid #f3f3f3;
+				border-top: 3px solid #4caf50;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				margin-right: 10px;
+			}
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			.toast {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				padding: 10px 20px;
+				background-color: #333;
+				color: white;
+				border-radius: 5px;
+				display: none;
+				animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+			}
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeOut {
+				from {
+					opacity: 1;
+				}
+				to {
+					opacity: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Random Bible Verse</h1>
+			<div id="verse-container">
+				<p id="verse">Click the button to get a verse</p>
+				<p id="reference"></p>
+				<button
+					id="copy-button"
+					class="button copy-button"
+					style="display: none"
+					onclick="copyVerse()"
+				>
+					Copy Verse
+				</button>
+			</div>
+			<button id="get-verse-button" class="button" onclick="getRandomVerse()">
+				<span id="loading-spinner" class="loading" style="display: none"></span>
+				Get Random Verse
+			</button>
+			<p id="error"></p>
+
+			<div class="history-container">
+				<h3>History</h3>
+				<div id="verse-history"></div>
+			</div>
+		</div>
+		<div id="toast" class="toast"></div>
+
+		<script>
+			const API_KEY = "ef58a648aa506d7fdee18f9e119eeb63";
+			const BIBLE_ID = "9879dbb7cfe39e4d-01";
+			const API_BASE_URL = "https://api.scripture.api.bible/v1";
+
+			const verseHistory = [];
+			const maxHistoryItems = 5;
+
+			function showToast(message) {
+				const toast = document.getElementById("toast");
+				toast.textContent = message;
+				toast.style.display = "block";
+				setTimeout(() => {
+					toast.style.display = "none";
+				}, 3000);
+			}
+
+			async function copyVerse() {
+				const verse = document.getElementById("verse").textContent;
+				const reference = document.getElementById("reference").textContent;
+				const textToCopy = `${verse} - ${reference}`;
+
+				try {
+					await navigator.clipboard.writeText(textToCopy);
+					showToast("Verse copied to clipboard!");
+				} catch (err) {
+					showToast("Failed to copy verse");
+					console.error("Failed to copy text: ", err);
+				}
+			}
+
+			function addToHistory(content, reference) {
+				const historyItem = { content, reference };
+				verseHistory.unshift(historyItem);
+
+				if (verseHistory.length > maxHistoryItems) {
+					verseHistory.pop();
+				}
+
+				updateHistoryDisplay();
+			}
+
+			function updateHistoryDisplay() {
+				const historyContainer = document.getElementById("verse-history");
+				historyContainer.innerHTML = verseHistory
+					.map(
+						(item, index) => `
+                <div class="history-item" onclick="displayHistoryItem(${index})">
+                    <strong>${item.reference}</strong><br>
+                    ${item.content.substring(0, 50)}...
+                </div>
+            `
+					)
+					.join("");
+			}
+
+			function animateText(text, element) {
+				element.textContent = "";
+				element.style.opacity = 1;
+
+				const chars = text.split("");
+				chars.forEach((char, index) => {
+					const span = document.createElement("span");
+					span.textContent = char;
+					span.className = "char";
+					span.style.animationDelay = `${index * 100}ms`;
+					element.appendChild(span);
+				});
+			}
+
+			function displayVerse(content, reference) {
+				const verseElement = document.getElementById("verse");
+				const referenceElement = document.getElementById("reference");
+
+				// Reset classes
+				verseElement.className = "";
+				referenceElement.className = "";
+
+				// Start animations
+				setTimeout(() => {
+					animateText(content, verseElement);
+					referenceElement.textContent = reference;
+					referenceElement.classList.add("animated");
+				}, 100);
+
+				document.getElementById("copy-button").style.display = "inline-block";
+			}
+
+			function displayHistoryItem(index) {
+				const item = verseHistory[index];
+				displayVerse(item.content, item.reference);
+			}
+
+			async function getRandomVerse() {
+				const errorElement = document.getElementById("error");
+				const loadingSpinner = document.getElementById("loading-spinner");
+				const getVerseButton = document.getElementById("get-verse-button");
+
+				errorElement.textContent = "";
+				loadingSpinner.style.display = "inline-block";
+				getVerseButton.disabled = true;
+
+				try {
+					// First, get a list of available books
+					const booksResponse = await fetch(
+						`${API_BASE_URL}/bibles/${BIBLE_ID}/books`,
+						{
+							headers: { "api-key": API_KEY },
+						}
+					);
+
+					if (!booksResponse.ok)
+						throw new Error(`API error: ${booksResponse.statusText}`);
+
+					const booksData = await booksResponse.json();
+					const randomBook =
+						booksData.data[Math.floor(Math.random() * booksData.data.length)];
+
+					// Get chapters for the selected book
+					const chaptersResponse = await fetch(
+						`${API_BASE_URL}/bibles/${BIBLE_ID}/books/${randomBook.id}/chapters`,
+						{ headers: { "api-key": API_KEY } }
+					);
+
+					if (!chaptersResponse.ok)
+						throw new Error(`API error: ${chaptersResponse.statusText}`);
+
+					const chaptersData = await chaptersResponse.json();
+					const randomChapter =
+						chaptersData.data[
+							1 + Math.floor(Math.random() * (chaptersData.data.length - 1))
+						];
+
+					// Get verses for the selected chapter
+					const versesResponse = await fetch(
+						`${API_BASE_URL}/bibles/${BIBLE_ID}/chapters/${randomChapter.id}/verses`,
+						{ headers: { "api-key": API_KEY } }
+					);
+
+					if (!versesResponse.ok)
+						throw new Error(`API error: ${versesResponse.statusText}`);
+
+					const versesData = await versesResponse.json();
+					const randomVerse =
+						versesData.data[Math.floor(Math.random() * versesData.data.length)];
+
+					// Get the content of the selected verse
+					const verseResponse = await fetch(
+						`${API_BASE_URL}/bibles/${BIBLE_ID}/verses/${randomVerse.id}?content-type=text`,
+						{ headers: { "api-key": API_KEY } }
+					);
+
+					if (!verseResponse.ok)
+						throw new Error(`API error: ${verseResponse.statusText}`);
+
+					const verseData = await verseResponse.json();
+					const content = verseData.data.content;
+					const reference = `${randomBook.name} ${randomChapter.number}:${randomVerse.number}`;
+
+					displayVerse(content, reference);
+					addToHistory(content, reference);
+				} catch (error) {
+					console.error("Error:", error);
+					errorElement.textContent = `Error: ${error.message}. Please check the console for more details.`;
+					document.getElementById("verse").textContent =
+						"An error occurred while fetching the verse. Please try again.";
+					document.getElementById("reference").textContent = "";
+				} finally {
+					loadingSpinner.style.display = "none";
+					getVerseButton.disabled = false;
+				}
+			}
+		</script>
+	</body>
+</html>
