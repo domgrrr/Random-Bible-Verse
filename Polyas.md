@@ -32,11 +32,11 @@
 
             * Alongside the p element reference a button element with the id copy-button class button copy-button style display: none labeled Copy Verse to copy verse to clipboard (hidden initially)
 
-    * Alongside the div container include a button element with the id get-verse-button and class button to fetch a new random verse labeled Get Random Verse
+        * Alongside the div container include a button element with the id get-verse-button and class button to fetch a new random verse labeled Get Random Verse
 
-        * Inside the div container include a span with the id loading-spinner and class loading style display: none with no label for the loading spinner hidden initially
+            * Inside the div container include a span with the id loading-spinner and class loading style display: none with no label for the loading spinner hidden initially
 
-    * Alongside the div container  
+        * Alongside the div container include a p element with the id error for displaying error messages
 
 
 # 2.  styles.css
