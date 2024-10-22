@@ -22,15 +22,15 @@
 
     * A div with the class of container for centering content
 
-    * Inside the div container an h1 of Random Bible Verse
+        * Inside the div container an h1 of Random Bible Verse
 
-    * Alongside that h1 another div with the id of verse-container for the verse display area
+        * Alongside that h1 another div with the id of verse-container for the verse display area
 
-    * Inside the div verse-container a p element with the id of verse labeled Click the button to get a verse
+            * Inside the div verse-container a p element with the id of verse labeled Click the button to get a verse
 
-    * Alongside the p element verse another p element with the id of reference with no label where the verse reference will be displayed (book, chapter, verse)
+            * Alongside the p element verse another p element with the id of reference with no label where the verse reference will be displayed (book, chapter, verse)
 
-    * 
+            * Alongside the p element reference a button element with the id copy-button class button copy-button style display: none labeled Copy Verse to copy verse to clipboard (hidden initially)
 
 
 # 2.  styles.css
