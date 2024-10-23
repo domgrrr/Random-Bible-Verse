@@ -58,6 +58,14 @@
 
   C Animation Effects
       
-      * Ch
+      * Character by character fade in
+
+      * Reference text animation
+
+      * Loading spinner
+
+      * Toast notifications
+
+  
 
 # 3.  script.js
