@@ -66,6 +66,14 @@
 
       * Toast notifications
 
+  D Interactice Elements
+
+      * Button styles and hover states
+
+      * History item hover effects
+
+      * Disabled states
+
   
 
 # 3.  script.js
