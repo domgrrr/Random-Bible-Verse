@@ -41,3 +41,7 @@ body {
   white-space: pre-wrap;
 }
 
+#verse.animated {
+  opacity: 1;
+}
+
