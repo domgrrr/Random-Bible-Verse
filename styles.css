@@ -68,3 +68,10 @@ body {
   transform: translateY(20px);
 }
 
+#reference.animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1.5s ease;
+  transition-delay: 2s;
+}
+
