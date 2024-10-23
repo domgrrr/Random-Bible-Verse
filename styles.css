@@ -75,3 +75,7 @@ body {
   transition-delay: 2s;
 }
 
+#error {
+  color: red;
+  margin-top: 1rem;
+}
