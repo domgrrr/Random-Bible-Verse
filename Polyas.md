@@ -40,4 +40,14 @@
 
 # 2.  styles.css
 
+  A Layout Styles
+
+      * Body layout and centering
+
+      * Container dimensions and positioning
+
+      * Responsive design considerations
+
+  B Typography
+
 # 3.  script.js
