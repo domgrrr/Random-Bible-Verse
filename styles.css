@@ -110,3 +110,7 @@ body {
   font-size: 14px;
 }
 
+.copy-button:hover {
+  background-color: #1976D2;
+}
+
