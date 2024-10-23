@@ -50,4 +50,14 @@
 
   B Typography
 
+      * Font families
+
+      * Font sizes and colors
+
+      * Text alignment and spacing
+
+  C Animation Effects
+      
+      * Ch
+
 # 3.  script.js
