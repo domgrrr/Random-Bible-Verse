@@ -164,3 +164,8 @@ body {
   animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
 }
 
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
