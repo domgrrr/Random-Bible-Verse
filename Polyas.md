@@ -2,7 +2,7 @@
 
 # 1.  index.html  
 
-  A Document Setup
+  Document Setup
 
       * DOCTYPE declaration
 
@@ -10,7 +10,7 @@
 
       * Head section with metadata
 
-  B Resource Loading
+  Resource Loading
 
       * Character encoding
 
@@ -20,7 +20,7 @@
 
       * CSS File
 
-  C Main Content Section
+  Main Content Section
 
       * Container div for centering
 
@@ -32,7 +32,7 @@
 
       * History section
 
-  D Supporting Elements
+  Supporting Elements
 
       * Toast notifications
 
@@ -40,7 +40,7 @@
 
 # 2.  styles.css
 
-  A Layout Styles
+  Layout Styles
 
       * Body layout and centering
 
@@ -48,7 +48,7 @@
 
       * Responsive design considerations
 
-  B Typography
+  Typography
 
       * Font families
 
@@ -56,7 +56,7 @@
 
       * Text alignment and spacing
 
-  C Animation Effects
+  Animation Effects
       
       * Character by character fade in
 
@@ -66,7 +66,7 @@
 
       * Toast notifications
 
-  D Interactive Elements
+  Interactive Elements
 
       * Button styles and hover states
 
@@ -74,7 +74,7 @@
 
       * Disabled states
 
-  E Visual Design
+  Visual Design
 
       * Colors and backgrounds
 
