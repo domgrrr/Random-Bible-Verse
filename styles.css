@@ -104,3 +104,9 @@ body {
   cursor: not-allowed;
 }
 
+.copy-button {
+  background-color: #2196F3;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
