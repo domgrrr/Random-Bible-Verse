@@ -66,7 +66,7 @@
 
       * Toast notifications
 
-  D Interactice Elements
+  D Interactive Elements
 
       * Button styles and hover states
 
@@ -74,6 +74,14 @@
 
       * Disabled states
 
-  
+  E Visual Design
+
+      * Colors and backgrounds
+
+      * Borders and shadows
+
+      * Spacing and margins
+
+      * Border radius for rounded corners
 
 # 3.  script.js
