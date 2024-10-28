@@ -69,3 +69,6 @@ function animateText(text, element) {
   });
 }
 
+function displayVerse(content, reference) {
+  
+}
