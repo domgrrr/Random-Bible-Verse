@@ -20,3 +20,6 @@ function showToast(message) {
   }, 3000);
 }
 
+async function copyVerse() {
+  const verse = document.getElementById('reference').textContent;
+}
