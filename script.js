@@ -63,6 +63,7 @@ function animateText(text, element) {
   chars.forEach((char, index) => {
     const span = document.createElement('span');
     span.textContent = char;
+    span.className = 'char';
     
   })
 }
