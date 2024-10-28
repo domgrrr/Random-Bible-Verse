@@ -46,5 +46,6 @@ function addToHistory(content, reference) {
 }
 
 function updateHistoryDisplay() {
+  const historyContainer = document.getElementById('verse-history');
   
 }
