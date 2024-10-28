@@ -77,5 +77,8 @@ function displayVerse(content, reference) {
   verse.Element.className = '';
   referenceElement.className = '';
 
-  
+  //  Start animation
+  setTimeout(() => {
+    
+  })
 }
