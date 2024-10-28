@@ -34,3 +34,6 @@ async function copyVerse() {
   }
 }
 
+function addToHistory(content, reference) {
+  
+}
