@@ -56,5 +56,8 @@ function updateHistoryDisplay() {
 }
 
 function animateText(text, element) {
+  element.textContent = '';
+  element.style.opacity = 1;
+
   
 }
