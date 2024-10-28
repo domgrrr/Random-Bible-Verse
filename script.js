@@ -92,3 +92,6 @@ function displayHistoryItem(index) {
   displayVerse(item.content, item.reference);
 }
 
+async function getRandomVerse() {
+  
+}
