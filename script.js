@@ -55,3 +55,6 @@ function updateHistoryDisplay() {
   `).join('');
 }
 
+function animateText(text, element) {
+  
+}
