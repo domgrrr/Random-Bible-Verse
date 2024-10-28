@@ -101,5 +101,12 @@ async function getRandomVerse() {
   loadingSpinner.style.display = 'inline-block';
   getVerseButton.disabled = true;
 
-  
+  try {
+    //  First, get a list of available books
+    const booksResponse = await fetch(`${API_BASE_URL}/bibles/${BIBLE_ID}/books`, {
+      headers: { 'api-key': API_KEY }
+    });
+
+    
+  }
 }
