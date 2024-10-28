@@ -64,6 +64,8 @@ function animateText(text, element) {
     const span = document.createElement('span');
     span.textContent = char;
     span.className = 'char';
-    
-  })
+    span.style.animationDelay = `${index * 100}ms`;
+    element.appendChild(span);
+  });
 }
+
