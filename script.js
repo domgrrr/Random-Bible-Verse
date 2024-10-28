@@ -93,5 +93,6 @@ function displayHistoryItem(index) {
 }
 
 async function getRandomVerse() {
+  const errorElement = document.getElementById('error');
   
 }
