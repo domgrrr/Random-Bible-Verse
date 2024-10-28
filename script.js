@@ -71,5 +71,11 @@ function animateText(text, element) {
 
 function displayVerse(content, reference) {
   const verseElement = document.getElementById('verse');
+  const referenceElement = document.getElementById('reference');
+
+  //  Reset classes
+  verse.Element.className = '';
+  referenceElement.className = '';
+
   
 }
