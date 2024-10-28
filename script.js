@@ -97,5 +97,9 @@ async function getRandomVerse() {
   const loadingSpinner = document.getElementById('loading-spinner');
   const getVerseButton = document.getElementById('get-verse-button');
 
+  errorElement.textContent = '';
+  loadingSpinner.style.display = 'inline-block';
+  getVerseButton.disabled = true;
+
   
 }
