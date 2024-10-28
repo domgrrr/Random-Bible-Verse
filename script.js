@@ -45,3 +45,6 @@ function addToHistory(content, reference) {
   updateHistoryDisplay();
 }
 
+function updateHistoryDisplay() {
+  
+}
