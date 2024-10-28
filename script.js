@@ -87,3 +87,6 @@ function displayVerse(content, reference) {
   document.getElementById('copy-button').style.display = 'inline-block';
 }
 
+function displayHistoryItem(index) {
+  
+}
