@@ -126,11 +126,11 @@
 
       * Multiple API calls to randomly select:
 
-          * Book
+          Book
 
-          * Chapter
+          Chapter
 
-          * Verse
+          Verse
 
       * History management with limit of 5 items
 
