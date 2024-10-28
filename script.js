@@ -117,6 +117,8 @@ async function getRandomVerse() {
       { headers: { 'api-key': API_KEY } }
     );
 
+    if (!chaptersResponse.ok) thow new Error(`API error: ${chaptersResponse.statusText}`);
 
+    
   }
 }
