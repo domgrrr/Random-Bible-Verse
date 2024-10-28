@@ -47,5 +47,11 @@ function addToHistory(content, reference) {
 
 function updateHistoryDisplay() {
   const historyContainer = document.getElementById('verse-history');
-  
+  historyContainer.innerHTML = verseHistory.map((item, index) => `
+    <div class="history-item" onclick="displayHistoryItem(${index})">
+      <strong>${item.reference}</strong><br>
+      ${item.content.substring(0, 50)}...
+    </div>
+  `).join('');
 }
+
