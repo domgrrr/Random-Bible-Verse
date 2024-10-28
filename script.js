@@ -21,5 +21,9 @@ function showToast(message) {
 }
 
 async function copyVerse() {
-  const verse = document.getElementById('reference').textContent;
+  const verse = document.getElementById('verse').textContent;
+  const reference = document.getElementById('reference').textContent;
+  const textToCopy = `${verse} - ${reference}`;
+
+  
 }
