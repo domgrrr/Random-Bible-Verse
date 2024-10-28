@@ -84,5 +84,6 @@ function displayVerse(content, reference) {
     referenceElement.classList.add('animate');
   }, 100);
 
-  
+  document.getElementById('copy-button').style.display = 'inline-block';
 }
+
