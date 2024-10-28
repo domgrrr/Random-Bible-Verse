@@ -85,3 +85,57 @@
       * Border radius for rounded corners
 
 # 3.  script.js
+
+  Setup
+
+      * Constants and global variables
+
+      * Event listeners initialized
+
+  UI Helper Functions
+
+      * Toast notifications
+
+      * Copy to clipboard functionality
+
+      * History management
+
+      * Text animation
+
+  Main API Functionality
+
+      * Fetching random verses through multiple API calls
+
+      * Error handling
+
+      * Loading state management
+
+  JS follows:
+
+      * Async/await for API calls
+
+      * Try/Catch for error handling
+
+      * Event-driven programming
+
+      * DOM manipulation
+
+      * Animation coordination
+
+  Key JS Features:
+
+      * Multiple API calls to randomly select:
+
+          * Book
+
+          * Chapter
+
+          * Verse
+
+      * History management with limit of 5 items
+
+      * Character-by-character animation
+
+      * Error handling and user feedback
+
+      * Loading states and disabled states
