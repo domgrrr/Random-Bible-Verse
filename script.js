@@ -94,5 +94,6 @@ function displayHistoryItem(index) {
 
 async function getRandomVerse() {
   const errorElement = document.getElementById('error');
+  const loadingSpinner = document.getElementById('loading-spinner');
   
 }
