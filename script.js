@@ -11,3 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('copy-button').addEventListener('click', copyVerse);
 });
 
+function showToast(message) {
+  
+}
