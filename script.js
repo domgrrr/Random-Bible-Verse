@@ -109,6 +109,9 @@ async function getRandomVerse() {
 
     if (!booksResponse.ok) throw new Error(`API error: ${booksResponse.statusText}`);
 
+    const booksData = await booksResponse.json();
+    const randomBook = booksData.data[Math.floor(Math.random() * booksData.data.length)];
+
     
   }
 }
