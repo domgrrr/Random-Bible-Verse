@@ -112,6 +112,8 @@ async function getRandomVerse() {
     const booksData = await booksResponse.json();
     const randomBook = booksData.data[Math.floor(Math.random() * booksData.data.length)];
 
-    
+    const chaptersResponse = await fetch(
+      
+    )
   }
 }
