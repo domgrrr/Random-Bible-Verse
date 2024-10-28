@@ -25,5 +25,10 @@ async function copyVerse() {
   const reference = document.getElementById('reference').textContent;
   const textToCopy = `${verse} - ${reference}`;
 
-  
+  try {
+    await navigator.clipboard.writeText(textToCopy);
+    showToast('Verse copied to clipboard!');
+  } catch {
+    
+  }
 }
