@@ -35,5 +35,8 @@ async function copyVerse() {
 }
 
 function addToHistory(content, reference) {
+  const historyItem = { content, reference };
+  versHistory.unshift(historyItem);
+
   
 }
