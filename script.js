@@ -107,6 +107,8 @@ async function getRandomVerse() {
       headers: { 'api-key': API_KEY }
     });
 
+    if (!booksResponse.ok) throw new Error(`API error: ${booksResponse.statusText}`);
+
     
   }
 }
