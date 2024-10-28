@@ -113,8 +113,10 @@ async function getRandomVerse() {
     const randomBook = booksData.data[Math.floor(Math.random() * booksData.data.length)];
 
     const chaptersResponse = await fetch(
-      `${API_BASE_URL}/bibles/${BIBLE_ID}/books/${randomBook.id}/chapters`;
-      
-    )
+      `${API_BASE_URL}/bibles/${BIBLE_ID}/books/${randomBook.id}/chapters`,
+      { headers: { 'api-key': API_KEY } }
+    );
+
+
   }
 }
