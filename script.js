@@ -88,5 +88,7 @@ function displayVerse(content, reference) {
 }
 
 function displayHistoryItem(index) {
-  
+  const item = verseHistory[index];
+  displayVerse(item.content, item.reference);
 }
+
