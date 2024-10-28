@@ -42,5 +42,6 @@ function addToHistory(content, reference) {
       verseHistory.pop();
   }
 
-  
+  updateHistoryDisplay();
 }
+
