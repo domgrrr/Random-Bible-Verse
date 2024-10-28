@@ -128,6 +128,9 @@ async function getRandomVerse() {
       { headers: { 'api-key': API_KEY } }
     );
 
+    if (!versesResponse.ok) throw new Error(`API error: ${versesResponse.statusText}`);
+
+    const verseData = await versesResponse.json();
     
   }
 }
