@@ -119,6 +119,9 @@ async function getRandomVerse() {
 
     if (!chaptersResponse.ok) thow new Error(`API error: ${chaptersResponse.statusText}`);
 
+    const chaptersData = await chaptersResponse.json();
+    const randomChapter = chaptersData.data[1 + Math.floor(Math.random() * (chaptersData.data.length - 1))];
+
     
   }
 }
