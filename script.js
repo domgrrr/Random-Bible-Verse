@@ -8,5 +8,6 @@ const maxHistoryItems = 5;
 //  Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('get-verse-button').addEventListener('click', getRandomVerse);
-  
-})
+  document.getElementById('copy-button').addEventListener('click', copyVerse);
+});
+
