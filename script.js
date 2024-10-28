@@ -28,7 +28,9 @@ async function copyVerse() {
   try {
     await navigator.clipboard.writeText(textToCopy);
     showToast('Verse copied to clipboard!');
-  } catch {
-    
+  } catch (err) {
+    showToast('Failed to copy verse');
+    console.error('Failed to copy text: ', err);
   }
 }
+
