@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showToast(message) {
-  
+  const toast = document.getElementById('toast');
+   
 }
