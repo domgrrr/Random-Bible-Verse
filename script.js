@@ -122,6 +122,9 @@ async function getRandomVerse() {
     const chaptersData = await chaptersResponse.json();
     const randomChapter = chaptersData.data[1 + Math.floor(Math.random() * (chaptersData.data.length - 1))];
 
-    
+    //  Get verses for the selected chapter
+    const versesResponse = await fetch(
+      
+    )
   }
 }
