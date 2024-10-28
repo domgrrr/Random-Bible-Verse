@@ -59,5 +59,8 @@ function animateText(text, element) {
   element.textContent = '';
   element.style.opacity = 1;
 
-  
+  const chars = text.split('');
+  chars.forEach((char, index) => {
+    
+  })
 }
