@@ -79,6 +79,7 @@ function displayVerse(content, reference) {
 
   //  Start animation
   setTimeout(() => {
+    animateText(content, verseElement);
     
   })
 }
