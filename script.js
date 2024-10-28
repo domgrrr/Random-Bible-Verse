@@ -124,7 +124,10 @@ async function getRandomVerse() {
 
     //  Get verses for the selected chapter
     const versesResponse = await fetch(
-      
-    )
+      `${API_BASE_ID}/bibles/${BIBLE_ID}/chapters/${randomChapter.id}/verses`,
+      { headers: { 'api-key': API_KEY } }
+    );
+
+    
   }
 }
