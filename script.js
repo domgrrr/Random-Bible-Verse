@@ -5,3 +5,8 @@ const API_BASE_URL = "https://api.scripture.api.bible/v1";
 const versHistory = [];
 const maxHistoryItems = 5;
 
+//  Initialize event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('get-verse-button').addEventListener('click', getRandomVerse);
+  
+})
