@@ -36,7 +36,11 @@ async function copyVerse() {
 
 function addToHistory(content, reference) {
   const historyItem = { content, reference };
-  versHistory.unshift(historyItem);
+  verseHistory.unshift(historyItem);
+
+  if (verseHistory.length > maxHistoryItems) {
+      verseHistory.pop();
+  }
 
   
 }
