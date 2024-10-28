@@ -80,6 +80,9 @@ function displayVerse(content, reference) {
   //  Start animation
   setTimeout(() => {
     animateText(content, verseElement);
-    
-  })
+    referenceElement.textContent = reference;
+    referenceElement.classList.add('animate');
+  }, 100);
+
+  
 }
