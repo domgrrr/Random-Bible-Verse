@@ -74,7 +74,11 @@ function animateText(text, element) {
         });
 
         //  Add space after word
-        if (index)
+        if (index < words.length - 1) {
+          const space = document.createTextNode(' ');
+          element.appendChild(wordSpan);
+          element.appendChile(space);
+        }
     });
 }
 
