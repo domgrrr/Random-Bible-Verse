@@ -59,13 +59,22 @@ function animateText(text, element) {
     element.textContent = '';
     element.style.opacity = 1;
     
-    const chars = text.split('');
-    chars.forEach((char, index) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.className = 'char';
-        span.style.animationDelay = `${index * 100}ms`;
-        element.appendChild(span);
+    const words = text.split('');
+
+    words.forEach((word, index) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'word';
+
+        word.split('').forEach((char, charIndex) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.className = 'char';
+          span.style.animationDelay = `${(index * words.length + charIndex) * 100}ms`;
+          element.appendChild(span);
+        });
+
+        //  Add space after word
+        if (index)
     });
 }
 
@@ -76,11 +85,20 @@ function displayVerse(content, reference) {
     // Reset classes
     verseElement.className = '';
     referenceElement.className = '';
+
+    //  Cleanup the content by fixing common split and issues
+    content = content
+      .replace(/ o f /g, ' of ')
+      .replace(/ c overed/g, ' covered')
+      .replace(/\s+/g, ' ')
+      .trim();
     
     // Start animations
     setTimeout(() => {
         animateText(content, verseElement);
-        referenceElement.textContent = reference;
+        referenceElement.textContent = reference
+          .replace(/undefined/g, '')
+          .trim();
         referenceElement.classList.add('animated');
     }, 100);
     
