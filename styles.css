@@ -35,6 +35,11 @@ body {
   overflow-y: auto;
 }
 
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 #verse {
   font-family: 'Dancing Script', cursive;
   font-size: 1.8rem;
