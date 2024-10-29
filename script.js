@@ -56,35 +56,38 @@ function updateHistoryDisplay() {
 }
 
 function animateText(text, element) {
-    element.textContent = '';
-    element.style.opacity = 1;
-    
-    // Split by words instead of characters to preserve word integrity
-    const words = text.split(' ');
-    
-    words.forEach((word, index) => {
-        // Create a span for the word
-        const wordSpan = document.createElement('span');
-        wordSpan.className = 'word';
-        
-        // Add each character of the word
-        word.split('').forEach((char, charIndex) => {
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.className = 'char';
-            span.style.animationDelay = `${(index * words.length + charIndex) * 100}ms`;
-            wordSpan.appendChild(span);
-        });
-        
-        // Add space after word
-        if (index < words.length - 1) {
-            const space = document.createTextNode(' ');
-            element.appendChild(wordSpan);
-            element.appendChild(space);
-        } else {
-            element.appendChild(wordSpan);
-        }
-    });
+  element.textContent = '';
+  element.style.opacity = 1;
+  
+  let totalDelay = 0;
+  const words = text.split(' ');
+  
+  words.forEach((word, wordIndex) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'word';
+      wordSpan.style.display = 'inline'; // Add this to ensure inline display
+      
+      word.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.className = 'char';
+          span.style.animationDelay = `${totalDelay * 50}ms`;
+          wordSpan.appendChild(span);
+          totalDelay++;
+      });
+      
+      element.appendChild(wordSpan);
+      
+      // Add space after word (except for last word)
+      if (wordIndex < words.length - 1) {
+          const spaceSpan = document.createElement('span');
+          spaceSpan.innerHTML = '&nbsp;'; // Use non-breaking space
+          spaceSpan.className = 'char space';
+          spaceSpan.style.animationDelay = `${totalDelay * 50}ms`;
+          element.appendChild(spaceSpan);
+          totalDelay++;
+      }
+  });
 }
 
 function displayVerse(content, reference) {
