@@ -1,5 +1,5 @@
 const API_KEY = "ef58a648aa506d7fdee18f9e119eeb63";
-const BIBLE_ID = "de4e12af7f28f599-01";
+const BIBLE_ID = "de4e12af7f28f599-01"; // King James Version with Apocrypha
 const API_BASE_URL = "https://api.scripture.api.bible/v1";
 
 const verseHistory = [];
@@ -59,25 +59,30 @@ function animateText(text, element) {
     element.textContent = '';
     element.style.opacity = 1;
     
-    const words = text.split('');
-
+    // Split by words instead of characters to preserve word integrity
+    const words = text.split(' ');
+    
     words.forEach((word, index) => {
+        // Create a span for the word
         const wordSpan = document.createElement('span');
         wordSpan.className = 'word';
-
+        
+        // Add each character of the word
         word.split('').forEach((char, charIndex) => {
-          const span = document.createElement('span');
-          span.textContent = char;
-          span.className = 'char';
-          span.style.animationDelay = `${(index * words.length + charIndex) * 100}ms`;
-          element.appendChild(span);
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'char';
+            span.style.animationDelay = `${(index * words.length + charIndex) * 100}ms`;
+            wordSpan.appendChild(span);
         });
-
-        //  Add space after word
+        
+        // Add space after word
         if (index < words.length - 1) {
-          const space = document.createTextNode(' ');
-          element.appendChild(wordSpan);
-          element.appendChile(space);
+            const space = document.createTextNode(' ');
+            element.appendChild(wordSpan);
+            element.appendChild(space);
+        } else {
+            element.appendChild(wordSpan);
         }
     });
 }
@@ -89,20 +94,20 @@ function displayVerse(content, reference) {
     // Reset classes
     verseElement.className = '';
     referenceElement.className = '';
-
-    //  Cleanup the content by fixing common split and issues
+    
+    // Clean up the content
     content = content
-      .replace(/ o f /g, ' of ')
-      .replace(/ c overed/g, ' covered')
-      .replace(/\s+/g, ' ')
-      .trim();
+        .replace(/ o f /g, ' of ')     // Fix 'o f' split
+        .replace(/ c overed/g, ' covered')  // Fix 'c overed' split
+        .replace(/\s+/g, ' ')          // Fix multiple spaces
+        .trim();                       // Remove leading/trailing spaces
     
     // Start animations
     setTimeout(() => {
         animateText(content, verseElement);
-        referenceElement.textContent = reference
-          .replace(/undefined/g, '')
-          .trim();
+        // Clean up reference text
+        const cleanReference = reference.replace(/undefined/g, '').trim();
+        referenceElement.textContent = cleanReference;
         referenceElement.classList.add('animated');
     }, 100);
     
