@@ -38,6 +38,12 @@ body {
 .word {
   display: inline-block;
   white-space: nowrap;
+  margin-right: 0;
+}
+
+.space {
+  display: inline;
+  margin-right: 0.25em;
 }
 
 #verse {
