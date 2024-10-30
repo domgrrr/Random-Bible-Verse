@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { selectHistoryVerse } from '../features/verse/verseSlice';
+import { selectHistoryVerse } from '../../features/verse/verseSlice';
 
 const HistoryContainer = styled.div`
   margin-top: 20px;
