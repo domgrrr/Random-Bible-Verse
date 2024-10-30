@@ -1,57 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { VerseDisplay } from './components/VerseDisplay';
+import { Controls } from './components/Controls';
+import { History } from './components/History';
+import { Toast } from './components/Toast';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f0f0;
+`;
+
+const ContentContainer = styled.div`
+  text-align: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 2rem;
+  color: #2c3e50;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <AppContainer>
+      <ContentContainer>
+        <Title>Random Bible Verse</Title>
+        <VerseDisplay />
+        <Controls />
+        <History />
+        <Toast />
+      </ContentContainer>
+    </AppContainer>
   );
 }
 
