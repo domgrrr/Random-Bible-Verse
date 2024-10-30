@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
-import { hideToast } from '../features/ui/uiSlice';
+import { hideToast } from '../../features/ui/uiSlice';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-20px); }
