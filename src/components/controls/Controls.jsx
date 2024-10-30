@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getRandomVerse } from '../features/verse/verseSlice';
-import { copyVerse, showToast } from '../features/ui/uiSlice';
-import { LoadingSpinner } from './LoadingSpinner';
+import { getRandomVerse } from '../../features/verse/verseSlice';
+import { copyVerse, showToast } from '../../features/ui/uiSlice';
+import { LoadingSpinner } from '../LoadingSpinner';
 
 const ControlsContainer = styled.div`
   margin: 1rem 0;
