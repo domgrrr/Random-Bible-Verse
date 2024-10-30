@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'; // Added useState
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -41,13 +41,7 @@ export function VerseDisplay() {
     const verseRef = useRef(null);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    useEffect(() => {
-        if (currentVerse.content && currentVerse.content !== 'Click the button to get a verse') {
-            animateVerse();
-        }
-    }, [currentVerse]);
-
-    const animateVerse = () => {
+    const animateVerse = React.useCallback(() => {
         setIsAnimating(true);
         setTimeout(() => {
             if (verseRef.current) {
@@ -64,7 +58,13 @@ export function VerseDisplay() {
                 });
             }
         }, 100);
-    };
+    }, [currentVerse.content]); // Add currentVerse.content as dependency
+
+    useEffect(() => {
+        if (currentVerse.content && currentVerse.content !== 'Click the button to get a verse') {
+            animateVerse();
+        }
+    }, [currentVerse, animateVerse]); // Add animateVerse to dependencies
 
     return (
         <VerseContainer>
