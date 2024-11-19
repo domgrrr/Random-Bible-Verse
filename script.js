@@ -1,36 +1,66 @@
 const API_KEY = "ef58a648aa506d7fdee18f9e119eeb63";
-const BIBLE_ID = "de4e12af7f28f599-01"; // King James Version with Apocrypha
+const BIBLE_ID = "de4e12af7f28f599-01";
 const API_BASE_URL = "https://api.scripture.api.bible/v1";
 
 const verseHistory = [];
 const maxHistoryItems = 5;
 
+// Initialize Lottie animation with error handling
+let doveAnimation;
+try {
+    doveAnimation = lottie.loadAnimation({
+        container: document.getElementById('dove-animation'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: './animations/dove.json'
+    });
+} catch (error) {
+    console.error('Error initializing Lottie:', error);
+}
+
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('get-verse-button').addEventListener('click', getRandomVerse);
-    document.getElementById('copy-button').addEventListener('click', copyVerse);
+    const getVerseButton = document.getElementById('get-verse-button');
+    const copyButton = document.getElementById('copy-button');
+    
+    if (getVerseButton) {
+        getVerseButton.addEventListener('click', getRandomVerse);
+    }
+    
+    if (copyButton) {
+        copyButton.addEventListener('click', copyVerse);
+    }
+
+    // Hide dove initially if it exists
+    const doveContainer = document.getElementById('dove-animation');
+    if (doveContainer) {
+        doveContainer.style.opacity = '0';
+    }
 });
 
 function showToast(message) {
     const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, 3000);
+    if (toast) {
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
 }
 
 async function copyVerse() {
-    const verse = document.getElementById("verse").textContent;
-    const reference = document.getElementById("reference").textContent;
+    const verse = document.getElementById("verse")?.textContent || '';
+    const reference = document.getElementById("reference")?.textContent || '';
     const textToCopy = `${verse} - ${reference}`;
     
     try {
         await navigator.clipboard.writeText(textToCopy);
         showToast('Verse copied to clipboard!');
     } catch (err) {
+        console.error('Failed to copy text:', err);
         showToast('Failed to copy verse');
-        console.error('Failed to copy text: ', err);
     }
 }
 
@@ -47,85 +77,106 @@ function addToHistory(content, reference) {
 
 function updateHistoryDisplay() {
     const historyContainer = document.getElementById('verse-history');
-    historyContainer.innerHTML = verseHistory.map((item, index) => `
-        <div class="history-item" onclick="displayHistoryItem(${index})">
-            <strong>${item.reference}</strong><br>
-            ${item.content.substring(0, 50)}...
-        </div>
-    `).join('');
+    if (historyContainer) {
+        historyContainer.innerHTML = verseHistory.map((item, index) => `
+            <div class="history-item" onclick="displayHistoryItem(${index})">
+                <strong>${item.reference}</strong><br>
+                ${item.content.substring(0, 50)}...
+            </div>
+        `).join('');
+    }
 }
 
 function animateText(text, element) {
-  element.textContent = '';
-  element.style.opacity = 1;
-  
-  let totalDelay = 0;
-  const words = text.split(' ');
-  
-  words.forEach((word, wordIndex) => {
-      const wordSpan = document.createElement('span');
-      wordSpan.className = 'word';
-      wordSpan.style.display = 'inline'; // Add this to ensure inline display
-      
-      word.split('').forEach((char) => {
-          const span = document.createElement('span');
-          span.textContent = char;
-          span.className = 'char';
-          span.style.animationDelay = `${totalDelay * 50}ms`;
-          wordSpan.appendChild(span);
-          totalDelay++;
-      });
-      
-      element.appendChild(wordSpan);
-      
-      // Add space after word (except for last word)
-      if (wordIndex < words.length - 1) {
-          const spaceSpan = document.createElement('span');
-          spaceSpan.innerHTML = '&nbsp;'; // Use non-breaking space
-          spaceSpan.className = 'char space';
-          spaceSpan.style.animationDelay = `${totalDelay * 50}ms`;
-          element.appendChild(spaceSpan);
-          totalDelay++;
-      }
-  });
+    if (!element) return;
+    
+    element.textContent = '';
+    element.style.opacity = 1;
+    
+    let totalDelay = 0;
+    const words = text.split(' ');
+    
+    words.forEach((word, wordIndex) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'word';
+        wordSpan.style.display = 'inline';
+        
+        word.split('').forEach((char) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.className = 'char';
+            span.style.animationDelay = `${totalDelay * 50}ms`;
+            wordSpan.appendChild(span);
+            totalDelay++;
+        });
+        
+        element.appendChild(wordSpan);
+        
+        if (wordIndex < words.length - 1) {
+            const spaceSpan = document.createElement('span');
+            spaceSpan.innerHTML = '&nbsp;';
+            spaceSpan.className = 'char space';
+            spaceSpan.style.animationDelay = `${totalDelay * 50}ms`;
+            element.appendChild(spaceSpan);
+            totalDelay++;
+        }
+    });
 }
 
 function displayVerse(content, reference) {
     const verseElement = document.getElementById("verse");
     const referenceElement = document.getElementById("reference");
+    const doveContainer = document.getElementById('dove-animation');
+    const copyButton = document.getElementById("copy-button");
+    
+    if (!verseElement || !referenceElement) return;
     
     // Reset classes
     verseElement.className = '';
     referenceElement.className = '';
     
-    // Clean up the content
-    content = content
-        .replace(/ o f /g, ' of ')     // Fix 'o f' split
-        .replace(/ c overed/g, ' covered')  // Fix 'c overed' split
-        .replace(/\s+/g, ' ')          // Fix multiple spaces
-        .trim();                       // Remove leading/trailing spaces
+    // Handle dove animation if it exists
+    if (doveAnimation && doveContainer) {
+        doveContainer.style.opacity = '1';
+        doveAnimation.goToAndPlay(0);
+        
+        // Only add event listener if it hasn't been added before
+        const animationCompleteHandler = () => {
+            setTimeout(() => {
+                doveContainer.style.opacity = '0';
+            }, 1000);
+            doveAnimation.removeEventListener('complete', animationCompleteHandler);
+        };
+        
+        doveAnimation.addEventListener('complete', animationCompleteHandler);
+    }
     
-    // Start animations
+    // Start verse animations
     setTimeout(() => {
         animateText(content, verseElement);
-        // Clean up reference text
-        const cleanReference = reference.replace(/undefined/g, '').trim();
-        referenceElement.textContent = cleanReference;
+        referenceElement.textContent = reference;
         referenceElement.classList.add('animated');
     }, 100);
     
-    document.getElementById("copy-button").style.display = "inline-block";
+    // Show copy button
+    if (copyButton) {
+        copyButton.style.display = "inline-block";
+    }
 }
 
 function displayHistoryItem(index) {
     const item = verseHistory[index];
-    displayVerse(item.content, item.reference);
+    if (item) {
+        displayVerse(item.content, item.reference);
+    }
 }
 
 async function getRandomVerse() {
     const errorElement = document.getElementById("error");
     const loadingSpinner = document.getElementById("loading-spinner");
     const getVerseButton = document.getElementById("get-verse-button");
+    
+    if (!errorElement || !loadingSpinner || !getVerseButton) return;
     
     errorElement.textContent = "";
     loadingSpinner.style.display = "inline-block";
@@ -182,8 +233,15 @@ async function getRandomVerse() {
     } catch (error) {
         console.error("Error:", error);
         errorElement.textContent = `Error: ${error.message}. Please check the console for more details.`;
-        document.getElementById("verse").textContent = "An error occurred while fetching the verse. Please try again.";
-        document.getElementById("reference").textContent = "";
+        const verseElement = document.getElementById("verse");
+        const referenceElement = document.getElementById("reference");
+        
+        if (verseElement) {
+            verseElement.textContent = "An error occurred while fetching the verse. Please try again.";
+        }
+        if (referenceElement) {
+            referenceElement.textContent = "";
+        }
     } finally {
         loadingSpinner.style.display = "none";
         getVerseButton.disabled = false;

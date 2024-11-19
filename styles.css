@@ -276,3 +276,35 @@ body {
       font-size: 14px;
   }
 }
+
+.header {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#dove-animation {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+
+  #dove-animation {
+    position: static;
+    transform: none;
+  }
+}

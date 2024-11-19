@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Living Word</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Living Word</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>The Living Word</h1>
-    <div id="verse-container">
-        <p id="verse">Click the button to get a verse</p>
-        <p id="reference"></p>
-        <button id="copy-button" class="button copy-button" style="display: none">
-            Copy Verse
+    <div class="container">
+        <div class="header">
+            <h1>The Living Word</h1>
+            <div id="dove-animation"></div>
+        </div>
+        <div id="verse-container">
+            <p id="verse">Click the button to get a verse</p>
+            <p id="reference"></p>
+            <button id="copy-button" class="button copy-button" style="display: none">
+                Copy Verse
+            </button>
+        </div>
+        <button id="get-verse-button" class="button">
+            <span id="loading-spinner" class="loading" style="display: none"></span>
+            Get Random Verse
         </button>
+        <p id="error"></p>
+        
+        <div class="history-container">
+            <h3>History</h3>
+            <div id="verse-history"></div>
+        </div>
     </div>
-    <button id="get-verse-button" class="button">
-        <span id="loading-spinner" class="loading" style="display: none"></span>
-        Get Random Verse
-    </button>
-    <p id="error"></p>
-    
-    <div class="history-container">
-        <h3>History</h3>
-        <div id="verse-history"></div>
-    </div>
-</div>
-<div id="toast" class="toast"></div>
+    <div id="toast" class="toast"></div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
